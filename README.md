@@ -117,24 +117,37 @@ If no custom rules are configured, files are organized into these categories:
 
 ## Installation
 
-### Requirements
-- **Operating System**: Windows, Linux, or macOS
-- **Rust**: [Install Rust](https://www.rust-lang.org/) (for building from source)
+### Pre-built Binaries (Recommended)
 
-### Steps
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/talpah/Downloads-Organizer.git
-   cd Downloads-Organizer
-   ```
-2. Build the project:
-   ```bash
-   cargo build --release
-   ```
-3. Run the executable:
-   ```bash
-   ./target/release/downloadManager
-   ```
+Download the latest release for your platform from the [Releases page](https://github.com/talpah/Downloads-Organizer/releases):
+
+| Platform | Binary |
+|----------|--------|
+| Linux x86_64 | `downloadManager-linux-x86_64` |
+| macOS Intel | `downloadManager-macos-x86_64` |
+| macOS Apple Silicon | `downloadManager-macos-arm64` |
+| Windows | `downloadManager-windows-x86_64.exe` |
+
+```bash
+# Linux/macOS: Make executable and run
+chmod +x downloadManager-linux-x86_64
+./downloadManager-linux-x86_64
+
+# Optional: Move to PATH
+sudo mv downloadManager-linux-x86_64 /usr/local/bin/downloadManager
+```
+
+### Building from Source
+
+Requirements:
+- [Rust](https://www.rust-lang.org/) (1.70+)
+
+```bash
+git clone https://github.com/talpah/Downloads-Organizer.git
+cd Downloads-Organizer
+cargo build --release
+./target/release/downloadManager
+```
 
 ## Systemd Service (Linux)
 
