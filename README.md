@@ -44,7 +44,9 @@ downloadManager --help
 
 ## Custom Rules Configuration
 
-The rules format is compatible with [RegExp Download Organizer](https://chromewebstore.google.com/detail/regexp-download-organizer/oamembonjndgangicfphlckkdmagpjlg), a Chrome extension that organizes downloads automatically. This tool lets you run the same rules manually or as a background service, useful for organizing files from other sources or re-organizing existing downloads.
+The JSON rules format is based on [RegExp Download Organizer](https://chromewebstore.google.com/detail/regexp-download-organizer/oamembonjndgangicfphlckkdmagpjlg), a Chrome extension that organizes downloads automatically. This tool lets you run the same rules manually or as a background service, useful for organizing files from other sources or re-organizing existing downloads.
+
+> **Note**: The Chrome extension uses JavaScript RegExp, while this tool uses Rust's regex crate (RE2-like). Most simple patterns work in both, but advanced features like backreferences (`\1`) and lookahead/lookbehind are not supported here. See [Regex Flavor](#regex-flavor) below.
 
 Create a `download_rules.json` file to define custom organization rules. The program searches for this file in the following locations (in priority order):
 
