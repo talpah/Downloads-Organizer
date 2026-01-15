@@ -1,4 +1,11 @@
 # Download Manager
+
+> **Fork Notice**: This is a fork of [Joeljaison391/Downloads-Organizer](https://github.com/Joeljaison391/Downloads-Organizer) with the following enhancements:
+> - **Custom rules via JSON** — Define your own organization rules with regex patterns
+> - **Run-once mode** — Organizes existing files and exits by default (use `--daemon` for continuous monitoring)
+> - **Platform-specific config** — Rules loaded from `~/.config/download-organizer/` (Linux), `~/Library/Application Support/` (macOS), or `%APPDATA%` (Windows)
+> - **Organize on startup** — Existing files are organized when the program runs, not just new downloads
+
 <p align="center">
   <img src="https://res.cloudinary.com/dxraggwp4/image/upload/v1735143608/DownloadOrganizer/pcholwjlzqhit0fn5yb0.png" alt="Logo" width="600" height="350">
 </p>
