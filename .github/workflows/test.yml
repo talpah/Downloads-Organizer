@@ -23,6 +23,7 @@ jobs:
       - name: Create Downloads Directory
         run: |
           mkdir -p ~/Downloads
+          echo "XDG_DOWNLOAD_DIR=$HOME/Downloads" >> $GITHUB_ENV
           echo "Created Downloads directory"
 
       - name: Create Test Rules

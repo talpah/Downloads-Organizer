@@ -188,7 +188,9 @@ fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
         return Ok(());
     }
 
-    let downloads_folder = dirs::download_dir().expect("Failed to locate Downloads folder");
+    let downloads_folder = dirs::download_dir()
+        .or_else(|| dirs::home_dir().map(|h| h.join("Downloads")))
+        .expect("Failed to locate Downloads folder");
     let unused_folder = downloads_folder.join("Unused");
     let report_file = downloads_folder.join("Weekly_Report.html");
     let report_status_file = downloads_folder.join("report_status.txt");
