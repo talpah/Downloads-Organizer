@@ -12,14 +12,13 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Rust
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          profile: minimal
-          override: true
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install Dependencies
+        run: sudo apt-get update && sudo apt-get install -y libdbus-1-dev pkg-config
 
       - name: Build Executable (downloadManager)
         run: |
@@ -27,7 +26,7 @@ jobs:
           echo "Application (downloadManager) built successfully."
 
       - name: Upload Executable Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: downloadManager-executable
+          name: downloadManager-linux-x86_64
           path: target/release/downloadManager

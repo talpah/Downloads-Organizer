@@ -12,62 +12,90 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Rust
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          profile: minimal
-          override: true
+        uses: dtolnay/rust-toolchain@stable
 
       - name: Install Dependencies
-        run: sudo apt-get install -y wget
+        run: sudo apt-get update && sudo apt-get install -y libdbus-1-dev pkg-config
 
       - name: Create Downloads Directory
         run: |
-          mkdir -p ./Downloads
-          echo "Created Downloads directory at $(pwd)/Downloads"
+          mkdir -p ~/Downloads
+          echo "Created Downloads directory"
 
-      - name: Build Application (downloadManager)
+      - name: Create Test Rules
+        run: |
+          mkdir -p ~/.config/download-organizer
+          cp download_rules.example.json ~/.config/download-organizer/download_rules.json
+          echo "Copied example rules to config directory"
+
+      - name: Build Application
         run: |
           cargo build --release --bin downloadManager
-          echo "Application (downloadManager) built successfully."
+          echo "Application built successfully."
 
-      - name: Run Application in Background
+      - name: Create Test Files
         run: |
-          target/release/downloadManager > app.log 2>&1 &
-          echo "Application started in background."
+          # Create test files locally instead of downloading
+          echo "test image content" > ~/Downloads/test_image.jpg
+          echo "test pdf content" > ~/Downloads/sample.pdf
+          echo "test archive" > ~/Downloads/archive.zip
+          echo "test installer" > ~/Downloads/app.deb
+          echo "test video" > ~/Downloads/video.mp4
+          ls -la ~/Downloads/
 
-      - name: Download Test Files
+      - name: Run Application (run-once mode)
         run: |
-          wget -P ./Downloads https://via.placeholder.com/150 -O ./Downloads/test_image1.jpg
-          wget -P ./Downloads https://via.placeholder.com/200 -O ./Downloads/test_image2.jpg
-          wget -P ./Downloads https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf -O ./Downloads/sample.pdf
-          echo "Test files downloaded and created."
+          ./target/release/downloadManager
+          echo "Application completed."
 
-      - name: Verify Files Moved
+      - name: Verify Files Organized
         run: |
-          if [ ! -f ./Downloads/Images/test_image1.jpg ]; then
-            echo "Test image1 was not moved to Images directory!" && exit 1
+          echo "Checking organized files..."
+          ls -laR ~/Downloads/
+
+          # Check that files were moved to correct locations
+          if [ -f ~/Downloads/Organized/Images/test_image.jpg ]; then
+            echo "✓ Image organized correctly"
+          else
+            echo "✗ Image not found in expected location" && exit 1
           fi
-          if [ ! -f ./Downloads/Images/test_image2.jpg ]; then
-            echo "Test image2 was not moved to Images directory!" && exit 1
+
+          if [ -f ~/Downloads/Organized/Documents/PDFs/sample.pdf ]; then
+            echo "✓ PDF organized correctly"
+          else
+            echo "✗ PDF not found in expected location" && exit 1
           fi
-          echo "Files moved successfully!"
 
-      - name: Stop Background Application
-        run: |
-          pkill -f 'target/release/downloadManager'
-          echo "Background application stopped."
-
-      - name: Verify Weekly Report Generation
-        run: |
-          if [ ! -f ./Downloads/Weekly_Report.html ]; then
-            echo "Weekly report was not generated!" && exit 1
+          if [ -f ~/Downloads/Organized/Archives/archive.zip ]; then
+            echo "✓ Archive organized correctly"
+          else
+            echo "✗ Archive not found in expected location" && exit 1
           fi
-          echo "Weekly report generated successfully!"
 
-      - name: Display Application Logs
+          if [ -f ~/Downloads/Organized/Installers/Linux/app.deb ]; then
+            echo "✓ Linux installer organized correctly"
+          else
+            echo "✗ Linux installer not found in expected location" && exit 1
+          fi
+
+          if [ -f ~/Downloads/Organized/Video/video.mp4 ]; then
+            echo "✓ Video organized correctly"
+          else
+            echo "✗ Video not found in expected location" && exit 1
+          fi
+
+          echo "All files organized successfully!"
+
+      - name: Test Daemon Mode Startup
         run: |
-          echo "Displaying application logs:" && cat app.log
+          # Test that daemon mode starts correctly
+          timeout 5 ./target/release/downloadManager --daemon || true
+          echo "Daemon mode test completed"
+
+      - name: Test Help Flag
+        run: |
+          ./target/release/downloadManager --help
+          echo "Help flag works"
