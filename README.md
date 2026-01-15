@@ -46,15 +46,13 @@ downloadManager --help
 
 The rules format is compatible with [RegExp Download Organizer](https://chromewebstore.google.com/detail/regexp-download-organizer/oamembonjndgangicfphlckkdmagpjlg), a Chrome extension that organizes downloads automatically. This tool lets you run the same rules manually or as a background service, useful for organizing files from other sources or re-organizing existing downloads.
 
-Create a `download_rules.json` file to define custom organization rules. The program searches for this file in the following locations (in order):
+Create a `download_rules.json` file to define custom organization rules. The program searches for this file in the following locations (in priority order):
 
-| Platform | Config Directory |
-|----------|------------------|
-| Linux    | `~/.config/download-organizer/download_rules.json` |
-| macOS    | `~/Library/Application Support/download-organizer/download_rules.json` |
-| Windows  | `%APPDATA%\download-organizer\download_rules.json` |
-
-You can also place the file next to the executable for a portable setup, or in your Downloads folder as a fallback.
+| Priority | Location | Notes |
+|----------|----------|-------|
+| 1 | Platform config dir | `~/.config/download-organizer/` (Linux), `~/Library/Application Support/download-organizer/` (macOS), `%APPDATA%\download-organizer\` (Windows) |
+| 2 | Executable directory | Portable mode — place rules next to the binary |
+| 3 | Downloads folder | Fallback location |
 
 ### Rules Format
 
