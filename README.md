@@ -87,6 +87,26 @@ Create a `download_rules.json` file to define custom organization rules. The pro
 
 Rules are evaluated in order — the first matching rule wins. If no custom rule matches, the default categorization is used.
 
+### Regex Flavor
+
+The `filename` field uses [Rust's regex crate](https://docs.rs/regex/latest/regex/#syntax), which is similar to RE2/Go syntax. Key differences from PCRE/JavaScript:
+
+| Feature | Supported |
+|---------|-----------|
+| Basic patterns (`.*`, `\d`, `[a-z]`) | ✅ Yes |
+| Unicode support | ✅ Yes (default) |
+| Case-insensitive `(?i)` | ✅ Yes |
+| Non-capturing groups `(?:...)` | ✅ Yes |
+| Backreferences (`\1`, `\2`) | ❌ No |
+| Lookahead/lookbehind | ❌ No |
+
+Example patterns:
+```
+.*\.pdf$                     # Files ending in .pdf
+.*\.(jpg|jpeg|png|gif)$      # Common image formats
+(?i).*\.docx?$               # .doc or .docx (case-insensitive)
+```
+
 ## Default File Types
 
 If no custom rules are configured, files are organized into these categories:
