@@ -58,6 +58,9 @@ Create a `download_rules.json` file to define custom organization rules. The pro
 
 ### Rules Format
 
+See [`download_rules.example.json`](download_rules.example.json) for a complete example with 19 rules covering installers, documents, media, archives, and more.
+
+Basic structure:
 ```json
 [
   {
@@ -66,13 +69,6 @@ Create a `download_rules.json` file to define custom organization rules. The pro
     "filename": ".*\\.(deb|rpm|AppImage|run)$",
     "mime": "application/(x-debian-package|x-rpm)",
     "pattern": "Organized/Installers/Linux/"
-  },
-  {
-    "description": "PDF documents",
-    "enabled": true,
-    "filename": ".*\\.pdf$",
-    "mime": "application/pdf",
-    "pattern": "Organized/Documents/PDFs/"
   }
 ]
 ```

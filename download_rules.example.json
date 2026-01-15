@@ -1,0 +1,134 @@
+[
+  {
+    "description": "Windows installers (.exe, .msi)",
+    "enabled": true,
+    "filename": ".*\\.(exe|msi)$",
+    "mime": "application/(x-msdownload|x-ms-installer|x-msi|exe|octet-stream)",
+    "pattern": "Organized/Installers/Windows/"
+  },
+  {
+    "description": "Linux installers (.deb, .rpm, .AppImage)",
+    "enabled": true,
+    "filename": ".*\\.(deb|rpm|AppImage|run)$",
+    "mime": "application/(x-debian-package|x-redhat-package-manager|x-rpm|vnd.appimage)",
+    "pattern": "Organized/Installers/Linux/"
+  },
+  {
+    "description": "Mac installers (.dmg)",
+    "enabled": true,
+    "filename": ".*\\.dmg$",
+    "mime": "application/x-apple-diskimage",
+    "pattern": "Organized/Installers/Mac/"
+  },
+  {
+    "description": "Android apps (.apk)",
+    "enabled": true,
+    "filename": ".*\\.apk$",
+    "mime": "application/vnd.android.package-archive",
+    "pattern": "Organized/Installers/Android/"
+  },
+  {
+    "description": "PDF documents",
+    "enabled": true,
+    "filename": ".*\\.pdf$",
+    "mime": "application/pdf",
+    "pattern": "Organized/Documents/PDFs/"
+  },
+  {
+    "description": "Word documents (.doc, .docx)",
+    "enabled": true,
+    "filename": ".*\\.docx?$",
+    "mime": "application/(msword|vnd.openxmlformats-officedocument.wordprocessingml.document)",
+    "pattern": "Organized/Documents/Office/"
+  },
+  {
+    "description": "Excel spreadsheets (.xls, .xlsx, .csv)",
+    "enabled": true,
+    "filename": ".*\\.(xlsx?|csv)$",
+    "mime": "application/(vnd.ms-excel|vnd.openxmlformats-officedocument.spreadsheetml.sheet)|text/csv",
+    "pattern": "Organized/Documents/Office/"
+  },
+  {
+    "description": "PowerPoint presentations (.ppt, .pptx)",
+    "enabled": true,
+    "filename": ".*\\.pptx?$",
+    "mime": "application/(vnd.ms-powerpoint|vnd.openxmlformats-officedocument.presentationml.presentation)",
+    "pattern": "Organized/Documents/Office/"
+  },
+  {
+    "description": "Images (jpg, png, gif, webp, svg)",
+    "enabled": true,
+    "filename": ".*\\.(jpe?g|png|gif|webp|svg|bmp|ico)$",
+    "mime": "image/.*",
+    "pattern": "Organized/Images/"
+  },
+  {
+    "description": "Audio files (mp3, wav, flac, aac, ogg)",
+    "enabled": true,
+    "filename": ".*\\.(mp3|wav|flac|aac|ogg|m4a|wma)$",
+    "mime": "audio/.*",
+    "pattern": "Organized/Audio/"
+  },
+  {
+    "description": "Video files (mp4, mkv, avi, mov, webm)",
+    "enabled": true,
+    "filename": ".*\\.(mp4|mkv|avi|mov|webm|wmv|flv|m4v)$",
+    "mime": "video/.*",
+    "pattern": "Organized/Video/"
+  },
+  {
+    "description": "Archives (zip, tar, rar, 7z, gz)",
+    "enabled": true,
+    "filename": ".*\\.(zip|tar|tar\\.gz|tgz|tar\\.bz2|tar\\.xz|rar|7z|gz|bz2|xz)$",
+    "mime": "application/(zip|gzip|x-gzip|x-tar|x-rar-compressed|x-7z-compressed|x-bzip2|x-xz)",
+    "pattern": "Organized/Archives/"
+  },
+  {
+    "description": "Fonts (ttf, otf, woff)",
+    "enabled": true,
+    "filename": ".*\\.(ttf|otf|woff2?|eot)$",
+    "mime": "font/.*|application/(x-font-ttf|x-font-otf|font-woff)",
+    "pattern": "Organized/Fonts/"
+  },
+  {
+    "description": "Code and scripts (py, js, sh, json, yaml)",
+    "enabled": true,
+    "filename": ".*\\.(py|js|ts|sh|bash|json|ya?ml|xml)$",
+    "mime": "text/(x-python|javascript|x-shellscript)|application/(json|x-yaml)",
+    "pattern": "Organized/Development/Code/"
+  },
+  {
+    "description": "Config files (.env, .conf, .ini)",
+    "enabled": true,
+    "filename": ".*\\.(env|conf|ini|cfg|ovpn|pem|key|pub)$",
+    "pattern": "Organized/Development/Configs/"
+  },
+  {
+    "description": "Java archives (.jar)",
+    "enabled": true,
+    "filename": ".*\\.jar$",
+    "mime": "application/java-archive",
+    "pattern": "Organized/Development/Code/"
+  },
+  {
+    "description": "Torrents",
+    "enabled": true,
+    "filename": ".*\\.torrent$",
+    "mime": "application/x-bittorrent",
+    "pattern": "Organized/Torrents/"
+  },
+  {
+    "description": "Disk images (iso, img)",
+    "enabled": true,
+    "filename": ".*\\.(iso|img|img\\.xz)$",
+    "mime": "application/(x-iso9660-image|x-raw-disk-image)",
+    "pattern": "Organized/DiskImages/"
+  },
+  {
+    "description": "Text and markdown files",
+    "enabled": true,
+    "filename": ".*\\.(txt|md|markdown|log)$",
+    "mime": "text/(plain|markdown)",
+    "pattern": "Organized/Documents/Text/"
+  }
+]
